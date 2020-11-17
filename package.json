@@ -1,0 +1,29 @@
+{
+  "name": "babel-plugin-transform-rax-to-react",
+  "version": "1.0.2",
+  "description": "babel-plugin-transform-rax-to-react",
+  "scripts": {
+    "clean": "rm -rf lib",
+    "build": "babel src -d lib",
+    "test": "mocha --require @babel/register",
+    "test:watch": "npm run test -- --watch",
+    "prepublish": "npm run clean && npm run build"
+  },
+  "main": "lib/index.js",
+  "devDependencies": {
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.4",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/preset-env": "^7.5.4",
+    "@babel/preset-react": "^7.7.0",
+    "@babel/register": "^7.4.4",
+    "mocha": "^6.1.4"
+  },
+  "keywords": [
+    "rax",
+    "react",
+    "babel-plugin"
+  ],
+  "author": "renyou.hdd",
+  "license": "ISC"
+}
