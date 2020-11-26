@@ -18,10 +18,17 @@ const COMPONENT_NAME_MAPS = {
   text: 'Text',
   icon: 'Icon',
   image: 'Image',
+  picture: 'Picture',
   scrollview: 'ScrollView',
   slider: 'Slider',
   textinput: 'TextInput',
   link: 'Link',
+  video: 'Video',
+  canvas: 'Canvas',
+  embed: 'Embed',
+  countdown: 'Countdown',
+  recyclerview: 'Recyclerview',
+  modal: 'Modal',
 };
 
 const CUSTOM_RAX_COMPONENT = '@alifd/meet-react-component-one';

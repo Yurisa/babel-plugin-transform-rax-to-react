@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-transform-rax-to-react",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "babel-plugin-transform-rax-to-react",
   "scripts": {
     "clean": "rm -rf lib",
