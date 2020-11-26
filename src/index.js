@@ -98,6 +98,7 @@ module.exports = function (babel, options) {
                   hasRender = true;
                   return false;
                 } else if (t.isIdentifier(s.imported, { name: 'shared' })) {
+                  needFakeShared = true;
                   return false;
                 }
               }
