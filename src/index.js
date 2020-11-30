@@ -120,8 +120,18 @@ module.exports = function (babel, options) {
           }
           // 处理rax拆开的包
           if (importValue.startsWith('rax-')) {
+            // 因为要从react中导入所以首先要判断是否存在import {} from 'rax' | 'react'
+            if (!isExistRaxOrReact(path, t)) {
+              insertAfterImportDeclaration(
+                [t.importDefaultSpecifier(t.identifier('React'))],
+                'react',
+                path,
+                t
+              );
+            }
             // 处理应当从react导入的包
             if (DEPS_MAP[importValue]) {
+              // 判断是否存在import ... from rax || react
               if (node.specifiers && node.specifiers.length > 0) {
                 const [importSpecifier] = node.specifiers;
                 const { container } = path;
@@ -193,7 +203,7 @@ module.exports = function (babel, options) {
                     item.source.value &&
                     item.source.value === CUSTOM_RAX_COMPONENT
                   ) {
-                    hasCustomRaxComponent = true
+                    hasCustomRaxComponent = true;
                     const { specifiers } = item;
 
                     // 如果存在在组件使用的变量名就取
@@ -288,9 +298,11 @@ function insertSpecifierToReact(specifier, path, t) {
   });
   if (!hasReact) {
     insertAfterImportDeclaration([specifier], 'react', path, t);
+    hasReact = true;
   }
 }
 
+// 向ReactDom中插入specifier
 function insertSpecifierToReactDom(specifier, path, t) {
   const { container } = path;
   container.forEach((item) => {
@@ -316,4 +328,21 @@ function insertAfterImportDeclaration(specifiers, sourceValue, path, t) {
   path.insertAfter(
     t.importDeclaration(specifiers, t.stringLiteral(sourceValue))
   );
+}
+
+function isExistRaxOrReact(path, t) {
+  let result = false;
+  const { container } = path;
+  container.forEach((item) => {
+    if (
+      t.isImportDeclaration(item) &&
+      item.source &&
+      item.source.value &&
+      (item.source.value === 'rax' || item.source.value === 'react')
+    ) {
+      result = true;
+    }
+  });
+
+  return result;
 }
