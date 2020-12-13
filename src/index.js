@@ -29,6 +29,7 @@ const COMPONENT_NAME_MAPS = {
   countdown: 'Countdown',
   recyclerview: 'Recyclerview',
   modal: 'Modal',
+  portal: 'Portal'
 };
 
 const CUSTOM_RAX_COMPONENT = '@alifd/meet-react-component-one';
